@@ -1,0 +1,7 @@
+version: '3.8'
+
+services:
+  all:
+    image: fullstack-frontend-all:0.1.0
+    ports:
+      - 3000:3000
