@@ -31,6 +31,7 @@ jobs:
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/fullstack-frontend-all:latest
   deployment:
     runs-on: self-hosted
+    needs: build
     steps:
       -
         name: Checkout
