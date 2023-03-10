@@ -39,4 +39,6 @@ jobs:
       - 
         name: deploy in k8s
         working-directory: .
-        run: kubectl apply -f front-end-all.yml
+        run: |
+          kubectl delete -f front-end-all.yml
+          kubectl apply -f front-end-all.yml
