@@ -19,7 +19,7 @@ const AugmentWords = () => {
     const formData = new FormData();
     formData.append('allWordsFile', allWordsFile);
     formData.append('existWordBooks', existWordBooks);
-    const response = await fetch('http://localhost:8080/english/wordbook', {
+    const response = await fetch('http://localhost:30302/english/wordbook', {
       method: 'POST',
       body: formData
     });
