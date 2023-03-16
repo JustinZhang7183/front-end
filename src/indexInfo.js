@@ -28,7 +28,7 @@ class IndexInfo extends React.Component {
     render() {
         return (
             <div>
-                <div>Current Time: {this.state.date.toLocaleTimeString()}</div>
+                <div>Current time: {this.state.date.toLocaleTimeString()}</div>
                 <AugmentWords/>
             </div>
         );
