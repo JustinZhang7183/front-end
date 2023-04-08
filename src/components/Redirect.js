@@ -40,7 +40,7 @@ const Redirect = () => {
         if (!searchParams?.get('code')) {
             const codeChallenge = sessionStorage.getItem('codeChallenge');
             const link = `http://localhost:8000/oauth2/authorize?response_type=code&client_id=client&scope=openid&redirect_uri=http://127.0.0.1:3000/authorized&code_challenge=${codeChallenge}&code_challenge_method=S256`;
-            window.location.href = link; // sessionStorage lost
+            window.location.href = link; // sessionStorage will lose
         }
     }, []);
     return <p>Redirecting ...</p>

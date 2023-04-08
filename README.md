@@ -13,3 +13,7 @@
 # Installing crypto-js
 
 - `npm i --save-dev crypto-js`
+
+# Installing react-cookie
+
+- `npm install react-cookies --save`
