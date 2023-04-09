@@ -5,6 +5,7 @@ import { Buffer } from "buffer";
 const Redirect = () => {
     const [searchParams] = useSearchParams();
     const navigate = useNavigate();
+    const redirectUri = "http://127.0.0.1:3000/authorized";
 
     useEffect(() => {
         if (searchParams?.get('code')) {
@@ -17,7 +18,7 @@ const Redirect = () => {
 
             const verifier = sessionStorage.getItem('codeVerifier');
             
-            const initialUrl = 'http://localhost:8000/oauth2/token?client_id=client&redirect_uri=http://127.0.0.1:3000/authorized&grant_type=authorization_code';
+            const initialUrl = `http://localhost:8000/oauth2/token?client_id=client&redirect_uri=${redirectUri}&grant_type=authorization_code`;
             const url = `${initialUrl}&code=${code}&code_verifier=${verifier}`;
 
             fetch(url, {
@@ -26,8 +27,8 @@ const Redirect = () => {
                 headers
             }).then(async (response) => {
                 const token = await response.json();
-                if (token?.id_token) {
-                    sessionStorage.setItem('id_token', token.id_token);
+                if (token?.access_token) {
+                    sessionStorage.setItem('id_token', token.access_token);
                     navigate('/home');
                 }
             }).catch((err) => {
@@ -39,8 +40,8 @@ const Redirect = () => {
     useEffect(() => {
         if (!searchParams?.get('code')) {
             const codeChallenge = sessionStorage.getItem('codeChallenge');
-            const link = `http://localhost:8000/oauth2/authorize?response_type=code&client_id=client&scope=openid&redirect_uri=http://127.0.0.1:3000/authorized&code_challenge=${codeChallenge}&code_challenge_method=S256`;
-            window.location.href = link; // sessionStorage will lose
+            const link = `http://localhost:8000/oauth2/authorize?response_type=code&client_id=client&scope=openid&redirect_uri=${redirectUri}&code_challenge=${codeChallenge}&code_challenge_method=S256`;
+            window.location.href = link; // sessionStorage lost
         }
     }, []);
     return <p>Redirecting ...</p>
